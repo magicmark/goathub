@@ -1,12 +1,18 @@
 <?php
-
+ini_set("memory_limit","64M");
 include "FaceDetector.php";
+include "image.php";
+
+$source   = new Image('lena512color.jpg');
+$overlay  = new Image('goathead.png');
 
 $imageSource = array(
 	'name' => 'lena512color.jpg',
 	'type' => 'jpeg'
 );
+
 $imageSource['size'] = getimagesize($imageSource['name']);
+
 $imageOverlay = array(
 	'name' => 'goathead.png',
 	'type' => 'png'
@@ -25,7 +31,7 @@ $facePos = array(
 	'y' => $face['y'] + $faceOffset['y'],
 );
 
-header('Content-Type: image/png');
+header('Content-Type: image/jpeg');
 $canvas = imagecreatetruecolor(512, 512);
 
 $imageSource['func'] = 'imagecreatefrom' . $imageSource['type'];
